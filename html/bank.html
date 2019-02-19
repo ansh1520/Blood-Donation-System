@@ -1,0 +1,309 @@
+<style type="text/css">
+.bankDonorHeading {
+	font-size: 20px;
+}
+.bankLinkDiv {
+	/*border: solid red 1px;*/
+	display: inline-block;
+	width: 320px;
+	float: left;
+	height: 565px;
+	background-color: #f2f2f2;
+}	
+.bankLinkDiv ul {
+	list-style: none;
+
+	/*position: static;
+	/*position: fixed;*/
+}
+.bankLinkDiv ul li {
+	padding: 5px;
+	color: #8d0000;
+
+}
+.bankLinkDiv ul li:hover {
+	cursor: pointer;
+	opacity: .6;
+}
+.bankContentDiv {
+	/*border: solid green 1px;*/
+	width: 73%;
+	display: inline-block;
+	float: left;
+}
+/*.bankContents {
+	display: none;
+}*/
+.bankContents {
+	display: none;
+	width: 750px;
+	margin: 10px auto;
+}
+.bankContents table
+{
+	width: 100%;
+}
+.bankContents table td
+{
+	border: solid #ccc 1px;
+	padding: 5px;
+
+}
+.bankBloodStockClass {
+
+}
+/*.ul{
+	list-style-type: none;
+	margin: 0;
+	left: 0;
+	padding: 0;
+	width: 15%;
+	background-color: bisque;
+	position: fixed;
+	height: 70%;
+	overflow: auto;
+}
+.li{
+	display: block;
+	color: 
+}*/
+
+</style>
+<script type="text/javascript">
+	$('.sideLinks').live("click", function(){
+			$('.sideLinks').css('font-weight','normal');
+			$(this).css('font-weight','bold');
+			$('.bankContents').hide();
+            switch($(this).attr("id")) {
+                  case "banknewDonationRequestLink":
+                        $('#bankDonationNewRequests').show();                        
+                        getDonationHistoryList("bank","new");
+                  break;
+                  case "bankDonationhistoryLink":
+                       $('#bankDonationHistory').show();
+                       getDonationHistoryList("bank","history");
+                  break;
+                  case "banknewReceiveRequestLink":
+                        $('#bankReceiveNewRequests').show();                        
+                        getReceiveHistoryList("bank","new");
+                  break;
+                  case "bankReceivehistoryLink":
+                       $('#bankReceiveHistory').show();
+                       getReceiveHistoryList("bank","history");
+                  break;
+                  case "bankstockLink":
+                       $('#bankBloodStock').show();
+                       getBloodStock("bank");
+                  break;
+                  case "bankdonorLink":
+                        $('#bankDonors').show();
+                  break;
+                  default:
+                         // do nothing
+                  break;
+            }
+      });
+	$('#banknewDonationRequestLink').click();
+	$('#listDonorsBttn').live("click", function(){
+            getDonorList($("#selectBloodGroupDonors").val());
+    });
+	 function updateDonationRqst(value,mode,id,date,qty) {
+            var jsonObject={};
+            jsonObject['mode']=mode;
+	            jsonObject['id']=id;
+            if(mode=="pTest" || mode=="fTest" ){
+	            jsonObject['status']=value;
+        	}else if(mode=="donation"){
+        		jsonObject['date']=date;
+        		jsonObject['qty']=qty;
+        	}
+            var JsonData=JSON.stringify(jsonObject);
+                  var newpath="../php/updateDonationRqst.php";  
+                        $.ajax({
+                                     url: newpath,
+                                     type:'POST',
+                                     data:{dataJson:JsonData},
+                                     async:false,
+                                     success:function(result){ 
+                                          getDonationHistoryList("bank","new");                                          
+                                     }//end of success
+
+                        });//end of ajax
+                      }
+	 
+	 $('.pTest').live("click", function(){
+	       $(this).html("<span class='NDRpending'> Pending </span>"
+	       	+"<br /><br /><span class='NDRpassed'> Passed </span>"
+	       	+"<br /><br /><span class='NDRfailed'> Failed </span>");
+	 }); 
+	 $('.NDRpending').live("click", function(){	
+	 		var data = $(this).closest('tr').attr('id'); 
+	 		var arr = data.split('_');	
+	       	updateDonationRqst('Pending','pTest',arr[1],"","");       	
+	 });  
+	 $('.NDRpassed').live("click", function(){	
+	 		var data = $(this).closest('tr').attr('id'); 
+	 		var arr = data.split('_');	 	
+	       	updateDonationRqst('Passed','pTest',arr[1],"","");       	
+	 });
+	 $('.NDRfailed').live("click", function(){
+	 		var data = $(this).closest('tr').attr('id'); 
+	 		var arr = data.split('_');		 	
+	       	updateDonationRqst('Failed','pTest',arr[1],"","");       	
+	 });
+
+	  $('.fTest').live("click", function(){
+	       $(this).html("<span class='NDRpending2'> Pending </span>"
+	       	+"<br /><br /><span class='NDRpassed2'> Passed </span>"
+	       	+"<br /><br /><span class='NDRfailed2'> Failed </span>");
+	 }); 
+	 $('.NDRpending2').live("click", function(){	
+	 		var data = $(this).closest('tr').attr('id'); 
+	 		var arr = data.split('_');	
+	       	updateDonationRqst('Pending','fTest',arr[1],"","");       	
+	 });  
+	 $('.NDRpassed2').live("click", function(){	
+	 		var data = $(this).closest('tr').attr('id'); 
+	 		var arr = data.split('_');	 	
+	       	updateDonationRqst('Passed','fTest',arr[1],"","");       	
+	 });
+	 $('.NDRfailed2').live("click", function(){
+	 		var data = $(this).closest('tr').attr('id'); 
+	 		var arr = data.split('_');		 	
+	       	updateDonationRqst('Failed','fTest',arr[1],"","");       	
+	 });
+	 $('.dateOfDonate').live("click", function(){
+	 		$(this).next('td').html("");
+	 		var data = $(this).closest('tr').attr('id'); 
+	 		var arr = data.split('_');
+	       $(this).parent().html("<input id='NDRdate_"+arr[1]+"' type='text' class='ndrUpdate' placeholder='DD/MM/YYYY'/>"
+	       	+"<br /><br /><input id='NDRqty_"+arr[1]+"' type='number' class='ndrUpdate' placeholder='Quantity'/>"
+	       	+"<br /><br /><input type='button' class='NDRbttn' value='Submit'/>");
+	 });
+	  $('.NDRbttn').live("click", function(){
+	  	var data = $(this).closest('tr').attr('id'); 
+	 	var arr = data.split('_');	
+	 	var date=$('#NDRdate_'+arr[1]).val();
+	 	var qty=$('#NDRqty_'+arr[1]).val();
+	  	if($('.ndrUpdate').val()!=""){
+	  		$('.ndrUpdate').css('border','solid #8b0000 1px');
+	  		updateDonationRqst('','donation',arr[1],date,qty);	  		
+	  	}else{
+	  		$('.ndrUpdate').css('border','solid red 1px');
+	  	}
+	  });
+
+
+
+function updateReceiveRqst(id,status,date,qty) {
+            var jsonObject={};
+            jsonObject['id']=id;
+            jsonObject['status']=status;	        
+    		jsonObject['date']=date;
+    		jsonObject['qty']=qty;
+            var JsonData=JSON.stringify(jsonObject);
+                  var newpath="../php/updateReceiveRqst.php";  
+                        $.ajax({
+                                     url: newpath,
+                                     type:'POST',
+                                     data:{dataJson:JsonData},
+                                     async:false,
+                                     success:function(result){ 
+                                          getReceiveHistoryList("bank","new");                                      
+                                     }//end of success
+
+                        });//end of ajax
+                      }
+	  $('.dateOfReceive').live("click", function(){
+	 		$(this).next('td').html("");
+	 		var data = $(this).closest('tr').attr('id'); 
+	 		var arr = data.split('_');
+	       $(this).parent().html("<input class='NRRstatus_"+arr[1]+"' type='radio' value='Accepted' name='bldRqstRadio' /> Accepted"
+	       	+"<input class='NRRstatus_"+arr[1]+"' type='radio' value='Rejected' name='bldRqstRadio' /> Rejected"
+	       	+"<br /><br /><input id='NRRdate_"+arr[1]+"' type='text' class='nrrUpdate' placeholder='DD/MM/YYYY'/>"
+	       	+"<br /><br /><input id='NRRqty_"+arr[1]+"' type='number' class='nrrUpdate' placeholder='Quantity'/>"
+	       	+"<br /><br /><input type='button' class='NRRbttn' value='Submit'/>");
+	 });
+
+	$('.NRRbttn').live("click", function(){
+	  	var data = $(this).closest('tr').attr('id'); 
+	 	var arr = data.split('_');	
+	 	var date=$('#NRRdate_'+arr[1]).val();
+	 	var qty=$('#NRRqty_'+arr[1]).val();
+	 	var status=$(".NRRstatus_"+arr[1]+":checked").val();
+	  	if($('.nrrUpdate').val()!=""){
+	  		$('.nrrUpdate').css('border','solid #8b0000 1px');
+	  		if($("input:radio[name='bldRqstRadio']").is(':checked')){
+	  			updateReceiveRqst(arr[1],status,date,qty);
+	  		}else{
+	  			alert("Please Accept or Reject to continue");
+	  		}	  			  		
+	  	}else{
+	  		$('.nrrUpdate').css('border','solid red 1px');
+	  	}
+	});
+	
+</script>
+
+<div class="bankLinkDiv">
+	<ul>
+		<li id="banknewDonationRequestLink" class="sideLinks">New Donation Request</li>
+		<li id="bankDonationhistoryLink" class="sideLinks">Donation History</li>
+		<li id="banknewReceiveRequestLink" class="sideLinks">New Receive Request</li>
+		<li id="bankReceivehistoryLink" class="sideLinks">Receive History</li>
+		<li id="bankstockLink" class="sideLinks">Blood Stock</li>
+		<li id="bankdonorLink" class="sideLinks">Donors List</li>
+	</ul>
+</div>
+<div class="bankContentDiv">
+	<div id="bankDonationNewRequests" class="bankContents">
+		<table id="bankNewRequestsTable"></table>
+	</div>
+	<div id="bankDonationHistory" class="bankContents">
+		<table id="bankHistoryRequestsTable"></table>
+	</div>
+	<div id="bankReceiveNewRequests" class="bankContents">
+		<table id="bankNewReceiveTable">
+			<!-- <tr>
+				<th>Receiver Name</th>
+				<th>Bank Name</th>
+				<th>Blood Group</th>
+				<th>Quantity</th>
+				<th>Date Of Receive</th>
+				<th>Status</th>
+			</tr> -->
+		</table>
+	</div>
+	<div id="bankReceiveHistory" class="bankContents">
+		<table id="bankHistoryReceiveTable">
+			
+		</table>
+	</div>
+	
+	<div id="bankBloodStock" class="bankContents">
+	<center>
+		<table class="bankBloodStockClass" id="bankBloodStockTable">
+			
+		</table>
+	</center>
+	</div>
+	
+	<div id="bankDonors" class="bankContents">
+		<p class="bankDonorHeading">Choose a blood group to view donors..</p>	
+		<select id="selectBloodGroupDonors" class="recieveInputs">
+		<option value="1">O+</option>
+		<option value="2">A+</option>
+		<option value="3">AB+</option>
+		<option value="4">B+</option>
+		<option value="5">O-</option>
+		<option value="6">A-</option>
+		<option value="7">AB-</option>
+		<option value="8">B-</option>
+		
+		</select>
+		<input id="listDonorsBttn" type="button" name="selectBloodGroupDonors" value="List Donors">
+
+		<table id="bankDonorsListTable"></table>
+	</div>
+</div>
+

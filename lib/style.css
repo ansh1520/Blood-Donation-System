@@ -1,0 +1,437 @@
+.body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	
+}
+/************************** Login Page ***********************/
+.loginDiv
+{
+	margin-top: 100px;
+	/*border: solid black 1px;
+	margin-right: 400px;
+	margin-left: 400px;*/
+	
+}
+.logo
+{
+	width: 200px;
+	height: auto;
+	margin: 0 auto;
+	display: block; 
+	/*border: solid red 1px;*/
+}
+.heading
+{
+	font-size: 50px;
+	font-family: Brush Script MT, Brush Script Std, cursive;
+	text-align: center;
+	/*border: solid red 1px;*/
+	margin: 0;
+}
+.loginInputs
+{
+	display: block;
+	margin: 0 auto 10px auto;
+	border: solid #8B0000 1px;
+	width: 200px;
+	height: 30px;
+	font-size: 16px;
+	text-align: center;
+	border-radius: 5px;
+}
+.loginLabels {
+	display: block;
+	font-size: 20px;
+	color:  #8B0000;
+	text-align: center;
+}
+.loginBttn
+{
+	background-color: #8B0000;
+	color: white;
+	width: 100px;
+	margin-top: 25px;
+}
+.loginBttn:hover
+{
+	background-color: green;
+	cursor: pointer;
+}
+.linksDiv {
+	width: 400px;
+	margin: 10px auto;
+	text-align: right;
+}
+.links{
+	color: grey;
+	text-decoration: none;
+	font-size: 12px;
+}
+.links:hover {
+	cursor: pointer;
+	color: #8B0000;
+}
+/************************** Registration Page ***********************/
+.logoRegistr {
+	width: 100px;
+	height: auto;
+	margin: 0 auto;
+	display: block; 
+	/*border: solid red 1px;*/
+}
+.headingRegstr {
+	font-size: 20px;
+	font-family: Brush Script MT, Brush Script Std, cursive;
+	text-align: center;
+	/*border: solid red 1px;*/
+	margin: 0;
+}
+.regstTable {
+	display: block;
+	margin: 0 auto;
+	width: 650px;
+	/*border: solid red 1px;*/
+}
+.regstrnInputs {
+	border: solid #8B0000 1px;
+	width: 200px;
+	height: 20px;
+	font-size: 14px;
+	text-align: center;
+	border-radius: 5px;
+}
+.addressInput {
+	height: 50px;
+}
+.regstrBttn{
+	background-color: #8B0000;
+	color: white;
+	width: 100px;
+	margin-top: 25px;
+	height: 30px;
+}
+.regstrBttn:hover
+{
+	background-color: green;
+	cursor: pointer;
+}
+.regSuccess {
+	color: #8B0000;
+	text-align: center;
+	margin: 50px;
+}
+.loginLink {
+	color: red;
+	font-size: 18px;
+	cursor: pointer;
+	text-decoration: none;
+}
+.loginLink:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+/************************** Dashboard Page *************************/
+.header{
+	/*border: solid red 1px;*/
+	border-bottom: solid #8B0000 2px;
+}
+.logoOnDashboard
+{
+	width: 85px;
+	/*border: solid red 1px;*/
+	display: inline-block;
+	margin: 0;
+	position: relative;
+	top: 7px;
+}
+.headingDashboard
+{
+	display: inline-block;
+	/*border: solid red 1px;*/
+	margin: 0;
+	font-size: 40px;
+	font-family: Brush Script MT, Brush Script Std, cursive;
+	position: relative;
+	top: -6px;
+}
+.roleStyle
+{
+	font-size: 18px;
+	background-color: #8B0000;
+	color: white;
+	padding-bottom: 4px;
+	padding-left: 10px;
+}
+.roleTitle
+{
+	font-family: verdana;
+}
+.roleHead
+{
+	font-family: arial;
+	font-style: italic;
+}
+.roleSpan
+{
+	display: inline-block;
+	margin-left: 15px;
+}
+.transactionLinks {
+	float: right;
+	display: inline-block;
+	margin: 10px 20px;
+	color: #8B0000;
+}
+.transactionLinks:hover {
+	cursor: pointer;
+	color: green;
+	font-size: 18px;
+}
+.signOutLink {
+	display: inline-block;
+	float: right;
+	font-size: 13px;
+	margin-right: 10px;
+	color: white;
+	text-decoration: none;
+}
+.signOutIcon {
+	width: 20px;
+	position: relative;
+	top: 2px;
+}
+.signOutLink:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+.userName {
+	float: right;
+	display: inline-block;
+	margin-top: 10px;
+	color: #8B0000;
+	margin-right: 10px;
+}
+.userName span {
+	font-weight: bold;
+}
+/**********************Donate / Receive Form******************/
+.donateDiv, .receiveDiv {
+	width: 600px;
+	margin: 10px auto;
+	border: dotted #ccc 1px;
+	border-radius: 5px;
+	padding: 10px;
+}
+.donateBttn, .recieveBttn {
+	background-color: white;
+	color: #8B0000;
+	margin-top: 25px;
+	height: 35px;
+	border: solid #8B0000 1px;
+	border-radius: 3px;
+	display: none;
+}
+.recieveBttn{
+	display: inline-block;
+}
+.donateBttn:hover, .recieveBttn:hover {
+	cursor: pointer;
+	background-color: #8B0000;
+	color: white;
+}
+.bloodBankListDiv, .hispitalListDiv {
+	display: none;
+	margin-top: 10px;
+}
+.bloodBankListDiv table td, .hispitalListDiv table td, #bankListTableRecieve td {
+	padding: 5px;
+	padding-left: 0;
+}
+#bankListTableRecieve {
+	margin-top: 10px;
+}
+.recieveInputs {
+	width: 250px;
+	border: solid #8B0000 1px;
+	height: 24px;
+	font-size: 14px;
+	border-radius: 3px;
+	background-color: white;
+}
+.tableHead {
+	width: 250px;
+	text-align: left;
+}
+.messageDiv {
+	display: none;
+	text-align: center;
+	margin: 25px auto;
+	color: #8B0000;
+}
+/********* Donor/Receiver history ********/
+.donorHistoryDiv, .receiverHistoryDiv
+{
+	width: 750px;
+	margin: 10px auto;
+
+}
+.donorHistoryDiv table, .receiverHistoryDiv table
+{
+	width: 100%;
+}
+.donorHistoryDiv table td, .receiverHistoryDiv table td
+{
+	/*border: solid #ccc 1px;*/
+	padding: 5px;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+/*th {
+    /*background-color: #ccc;*/
+    color: black;
+    /*opacity: .5;*/
+/*}*/
+.abc
+{
+	color: #8B0000;
+	font-style: italic;
+}
+
+/******* Hospital Role ********/
+.findStockBttn {
+	background-color: #8B0000;
+	color: white;
+	width: 100px;
+	height: 30px;
+	margin-top: 25px;
+	font-size: 17px;
+	border-radius: 8px; 
+}
+.findStockBttn:hover {
+	cursor: pointer;
+	background-color: green;
+	color: white;
+}
+.hospitalStockDiv {
+	text-align: center;
+}
+.hospitalStockTitle {
+	font-size: 30px;
+	font-family: arial;
+	font-weight: bold;
+	font-style: italic;
+}
+.hospitalStockHeading {
+	font-size: 20px;
+}
+.stockBankListTable {
+	text-align: center;
+}
+.hospitalStockTableDiv{
+	padding-top: 30px;
+}
+	/*font-size: 30px;*/
+	/*display: inline-block;*/
+/*font-family: Brush Script MT, Brush Script Std, cursive;
+	text-align: center;
+	margin: 0;*/
+
+.pTest:hover, .fTest:hover, .dateOfDonate:hover {
+	cursor: pointer;	
+}
+/**************************** Home Page *************************************************/
+/*.homeLinkDiv{
+	position: fixed;
+}*/
+.homeLinkDiv ul {
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+    
+}
+
+.homeLinkDiv li {
+    float: left;
+}
+
+.homeLinkDiv li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.homeLinkDiv li a:hover:not(.active) {
+    background-color: #111111;
+}
+.homeLinkDiv li a:active {
+	background-color: #4CAF50;
+    color: white;
+	}
+.transactionLinks a{
+	text-decoration: none;
+}
+.transactionLinks a:hover {
+	cursor: pointer;
+	color: green;
+	font-size: 18px;
+}
+#slideshow {
+  margin: 80px auto;
+  position: relative;
+  width: 700px;
+  height: 420px;
+  padding: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  background-color: #ffffff;
+  opacity: 0.8;
+}
+
+#slideshow > div {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  
+}
+.contentLinks{
+	padding: 50px;
+	font-size: 16px;
+	margin: 80px auto;
+    /*position: relative;*/
+    width: 80%;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+	background-color: #ffffff;
+	opacity: 0.8; /*#000000;8/
+	
+	color: #ffffff;*/
+
+
+}
+
+.contentLinks h2{
+	color: #8B0000;
+
+	
+}
+.homeHeader{
+	top: 0;
+	position: fixed;
+	width: 100%;
+	background-color: #ffffff;
+	padding-left: 0;
+	opacity: 1;
+	}
+.homeLinkDiv{
+	top: 70px;
+    position: fixed;
+	width: 100%;
+	padding-left: 0;
+	opacity: 1;
+
+}

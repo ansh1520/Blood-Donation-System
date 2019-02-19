@@ -1,0 +1,25 @@
+<script type="text/javascript">
+	$('#getStockHospitalBttn').live("click", function(){
+            getBloodStock("hospital");
+    });
+    $('.bankListHospital').live("click", function(){
+            $('#bloodStockHospitalTable').html("");
+    });
+    
+	
+</script>
+<div class="hospitalStockDiv">
+	<p class="hospitalStockTitle">Bank Blood Stock</p>
+	<p class="hospitalStockHeading">Choose a bank to view Blood Stock..</p>		
+</div>
+<center>
+	<div>
+		<table class="stockBankListTable" id="bankListTableHospital"></table>
+		<input class="findStockBttn" id="getStockHospitalBttn" value="Find Stock" type="button" name="findStock" />
+	</div>
+</center>
+<center>
+		<div class="hospitalStockTableDiv">
+			<table id="bloodStockHospitalTable"></table>
+		</div>
+</center>
